@@ -1,0 +1,12 @@
+test: "test"
+Prefix: "%&8[%&fSurvivors%&8]"
+Error: "%&cUne erreur est survenue, veuillez contacter le staff."
+NoPerm: "%&cVous n'avez pas la permission."
+Spawn:
+  - location:
+  - usage: "%prefix %&a/spawn"
+  - tped: "%prefix %&6Vous avez été téléporté au spawn."
+  - set: "%prefix %&6Vous avez set le spawn en %&e"
+Back:
+  - back: "%prefix %&6Vous avez été téléporté à votre emplacement précédent."
+  - noback: "%prefix %&6Vous n'avez pas de point de téléportation précédent."

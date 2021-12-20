@@ -1,0 +1,19 @@
+name: Survivors
+version: '${project.version}'
+main: com.scaffus.survivors.Survivors
+api-version: 1.18
+authors: [ Scaffus ]
+description: Paper plugin for survivos
+website: https://www.youtube.com/channel/UC4-uJde_HISRyfOKKtVEkCQ
+
+commands:
+  spawn:
+    aliases: []
+    description: Teleporte le joueur au spawn
+  setspawn:
+    description: Set le spawn du monde
+  test:
+    description: commande test
+  reloadconfig:
+    aliases: [rlconfig, rlc, reloadc]
+    description: Rercharge la config
