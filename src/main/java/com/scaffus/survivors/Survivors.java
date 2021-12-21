@@ -30,13 +30,13 @@ public final class Survivors extends JavaPlugin {
             SQL.connect();
         } catch (ClassNotFoundException e) {
             // e.printStackTrace();
-            Bukkit.getLogger().info(ChatColor.GOLD + "[Survivors] Database not connected");
+            this.getLogger().info(ChatColor.RED + "Database not connected");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
         if (SQL.isConnected()) {
-            Bukkit.getLogger().info(ChatColor.GREEN + "[Survivors] Database is connected!");
+            this.getLogger().info(ChatColor.GREEN + "Database is connected!");
         }
 
         Bukkit.getPluginManager().registerEvents(new SurvivorsEvents(this), this);
@@ -48,7 +48,7 @@ public final class Survivors extends JavaPlugin {
         new KillCommand(this);
         new MuteCommand(this);
         new UnmuteCommand(this);
-        this.getLogger().info(ChatColor.GREEN + "[Survivors] Le plugin demarre");
+        this.getLogger().info(ChatColor.GREEN + "Plugin active avec succes");
     }
 
     @Override

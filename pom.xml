@@ -6,7 +6,7 @@
 
     <groupId>com.scaffus</groupId>
     <artifactId>Survivors</artifactId>
-    <version>a9.8</version>
+    <version>a9.9</version>
     <packaging>jar</packaging>
 
     <name>Survivors</name>
