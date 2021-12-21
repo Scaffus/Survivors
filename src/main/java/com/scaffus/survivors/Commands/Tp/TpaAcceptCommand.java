@@ -21,7 +21,7 @@ public class TpaAcceptCommand implements CommandExecutor {
         this.plugin = plugin;
         this.sUtils = this.plugin.sUtils;
         tpa = TpaCommand.tpa;
-        plugin.getCommand("tpadeny").setExecutor(this);
+        plugin.getCommand("tpaccept").setExecutor(this);
     }
 
     @Override
@@ -30,14 +30,18 @@ public class TpaAcceptCommand implements CommandExecutor {
             sender.sendMessage(sUtils.only_player_can_exec);
         }
         Player target = (Player) sender;
+        if (!(target.hasPermission("survivors.tpa.tpaccept"))) {
+            target.sendMessage(sUtils.no_perm);
+        }
 
         // Si le joueur a recu une requete
         if (tpa.containsKey(target)) {
             Player p = tpa.get(target);
+            target.sendMessage(sUtils.tpa_accept_target.replace("%sender", p.getName()));
             p.sendMessage(sUtils.tpa_accept_sender.replace("%target", target.getName()));
-            target.sendMessage(sUtils.tpa_accept_sender.replace("%sender", p.getName()));
             Location target_location = target.getLocation().toBlockLocation();
             p.teleport(target_location);
+            tpa.remove(target);
         }
         return false;
     }

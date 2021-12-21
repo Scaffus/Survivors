@@ -21,6 +21,7 @@ public class TpaDenyCommand implements CommandExecutor {
         this.plugin = plugin;
         this.sUtils = this.plugin.sUtils;
         tpa = TpaCommand.tpa;
+        plugin.getCommand("tpadeny").setExecutor(this);
     }
 
     @Override
@@ -29,6 +30,11 @@ public class TpaDenyCommand implements CommandExecutor {
             sender.sendMessage(sUtils.only_player_can_exec);
         }
         Player target = (Player) sender;
+
+        if (!(target.hasPermission("survivors.tpa.tpadeny"))) {
+            target.sendMessage(sUtils.no_perm);
+            return true;
+        }
 
         if (tpa.containsKey(target)) {
             Player p = tpa.get(target);

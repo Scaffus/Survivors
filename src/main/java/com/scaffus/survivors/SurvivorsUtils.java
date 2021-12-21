@@ -64,17 +64,20 @@ public class SurvivorsUtils {
     public final String tpa_accept_sender;
     public final String tpa_accept_target;
 
+    // money
+    public final String money_money_usage;
+    public final String money_money_message;
+    public final String money_pay_usage;
+    public final String money_pay_view_sender;
+    public final String money_pay_view_target;
+    public final String money_pay_notenoughmoney;
+    public final String money_pay_needpositiveammount;
+    public final String money_add_usage;
+    public final String money_add_message;
+
     public SurvivorsUtils(Survivors plugin) {
         this.plugin = plugin;
         this.test = plugin.getConfig().getString("test");
-        //this.prefix = plugin.getConfig().getString("Prefix").replace("%&", "§");
-        //this.error = plugin.getConfig().getString("Error").replace("%&", "§").replace("%prefix", this.prefix);
-        //this.no_perm = plugin.getConfig().getString("NoPerm").replace("%&", "§").replace("%prefix", this.prefix);
-        //this.spawn_usage = plugin.getConfig().getString("Spawn.usage").replace("%&", "§").replace("%prefix", this.prefix);
-        //this.spawn_tped = plugin.getConfig().getString("Spawn.tped").replace("%&", "§").replace("%prefix", this.prefix);
-        //this.spawn_set = plugin.getConfig().getString("Spawn.set").replace("%&", "§").replace("%prefix", this.prefix);
-        //this.back_back = plugin.getConfig().getString("Back.back").replace("%&", "§").replace("%prefix", this.prefix);
-        //this.back_noback = plugin.getConfig().getString("Back.noback").replace("%&", "§").replace("%prefix", this.prefix);
         // database
         this.database_host = getFromConfig("Database.host");
         this.database_database = getFromConfig("Database.database");
@@ -128,9 +131,22 @@ public class SurvivorsUtils {
         this.tpa_accept_sender = getFromConfigAndFormat("Tpa.accept.sender");
         this.tpa_accept_target = getFromConfigAndFormat("Tpa.accept.target");
 
-        this.tpa_deny_usage = getFromConfigAndFormat("Tpa.adeny.usage");
-        this.tpa_deny_sender = getFromConfigAndFormat("Tpa.adeny.sender");
-        this.tpa_deny_target = getFromConfigAndFormat("Tpa.adeny.target");
+        this.tpa_deny_usage = getFromConfigAndFormat("Tpa.deny.usage");
+        this.tpa_deny_sender = getFromConfigAndFormat("Tpa.deny.sender");
+        this.tpa_deny_target = getFromConfigAndFormat("Tpa.deny.target");
+
+        // /money
+        this.money_money_usage = getFromConfigAndFormat("Money.money.usage");
+        this.money_money_message = getFromConfigAndFormat("Money.money.message");
+
+        this.money_pay_usage = getFromConfigAndFormat("Money.pay.usage");
+        this.money_pay_view_sender = getFromConfigAndFormat("Money.pay.sender");
+        this.money_pay_view_target = getFromConfigAndFormat("Money.pay.target");
+        this.money_pay_notenoughmoney = getFromConfigAndFormat("Money.pay.notenougmoney");
+        this.money_pay_needpositiveammount = getFromConfigAndFormat("Money.pay.needpositiveammount");
+
+        this.money_add_usage = getFromConfigAndFormat("Money.add.usage");
+        this.money_add_message = getFromConfigAndFormat("Money.add.message");
     }
 
     public String formatMessage(String str) {

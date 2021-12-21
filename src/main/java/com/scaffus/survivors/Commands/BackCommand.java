@@ -29,14 +29,16 @@ public class BackCommand implements CommandExecutor {
             return true; }
         Player p = (Player) sender;
 
-        if (p.hasPermission("survivors.back")) {
-            if (Back.back(p)) {
-                p.sendMessage(sUtils.back_back);
-            } else {
-                p.sendMessage(sUtils.back_noback);
-            }
+        if (!(p.hasPermission("survivors.back"))) {
+            p.sendMessage(sUtils.no_perm);
+            return true;
         }
 
+        if (Back.back(p)) {
+            p.sendMessage(sUtils.back_back);
+        } else {
+            p.sendMessage(sUtils.back_noback);
+        }
         return false;
     }
 }

@@ -7,9 +7,12 @@ description: Paper plugin for survivors smp
 website: https://www.youtube.com/channel/UC4-uJde_HISRyfOKKtVEkCQ
 
 commands:
+  back:
+    aliases: [retour]
+    description: Téléporte le joueur à son emplacement précédent
   spawn:
     aliases: []
-    description: Teleporte le joueur au spawn
+    description: Téléporte le joueur au spawn
     #usage: /spawn [set]
   test:
     description: commande test
@@ -35,3 +38,18 @@ commands:
   unmute:
     aliases: []
     description: Rend la parole à un joueur donné
+  tpa:
+    aliases: [teleporta]
+    description: Teleportation à un joueur donné
+  tpaccept:
+    aliases: [teleportaccept, teleportaccepte, teleportoui, tpaoui]
+    description: Accepte la demande de téléportation
+  tpadeny:
+    aliases: [teleportdeny, teleportnon, tpanon]
+    description: Refuse la demande de téléportation
+  money:
+    aliases: [balance, bal, argent]
+    description: Affiche l'argent du joueur
+  pay:
+    aliases: [payer]
+    description: Paie un joueur donné d'un montant donné

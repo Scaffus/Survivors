@@ -28,23 +28,24 @@ public class ReplyCommand implements CommandExecutor {
             sender.sendMessage(sUtils.only_player_can_exec);
             return true;
         }
-
         Player p = (Player) sender;
-        if (p.hasPermission("survivors.reply.use")) {
-            Player target = lastMessage.get(p);
 
-            StringBuilder message = new StringBuilder();
-
-            for (String s : args) {
-                message.append(s).append(" ");
-            }
-
-            target.sendMessage(sUtils.msg_view_receiver.replace("%sender", sender.getName()).replace("%message", message));
-            p.sendMessage(sUtils.msg_view_sender.replace("%target", target.getName()).replace("%message", message));
-            lastMessage.put(p, target);
-        } else {
+        if (!(p.hasPermission("survivors.reply.use"))) {
             p.sendMessage(sUtils.no_perm);
+            return true;
         }
+
+        Player target = lastMessage.get(p);
+
+        StringBuilder message = new StringBuilder();
+
+        for (String s : args) {
+            message.append(s).append(" ");
+        }
+
+        target.sendMessage(sUtils.msg_view_receiver.replace("%sender", sender.getName()).replace("%message", message));
+        p.sendMessage(sUtils.msg_view_sender.replace("%target", target.getName()).replace("%message", message));
+        lastMessage.put(p, target);
 
         return false;
     }

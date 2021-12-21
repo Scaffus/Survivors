@@ -20,16 +20,24 @@ public class TpaCommand implements CommandExecutor {
     public TpaCommand(Survivors plugin) {
         this.plugin = plugin;
         this.sUtils = this.plugin.sUtils;
+        tpa = new HashMap<Player, Player>();
+        plugin.getCommand("tpa").setExecutor(this);
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args) {
+        sender.sendMessage("tp");
         if (!(sender instanceof Player)) {
             sender.sendMessage(sUtils.only_player_can_exec);
         }
         Player p = (Player) sender;
 
-        if (args.length == 1) {
+        if (!(p.hasPermission("survivors.tpa.tpa"))) {
+            p.sendMessage(sUtils.no_perm);
+            return true;
+        }
+
+        if (args.length >= 1) {
             Player target = Bukkit.getPlayer(args[0]);
 
             if (target != null) {

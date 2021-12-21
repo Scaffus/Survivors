@@ -7,7 +7,13 @@ import com.scaffus.survivors.Commands.Admin.TestCommand;
 import com.scaffus.survivors.Commands.Admin.UnmuteCommand;
 import com.scaffus.survivors.Commands.Message.MessageCommand;
 import com.scaffus.survivors.Commands.Message.ReplyCommand;
+import com.scaffus.survivors.Commands.Money.MoneyCommand;
+import com.scaffus.survivors.Commands.Money.PayCommand;
+import com.scaffus.survivors.Commands.Tp.TpaAcceptCommand;
+import com.scaffus.survivors.Commands.Tp.TpaCommand;
+import com.scaffus.survivors.Commands.Tp.TpaDenyCommand;
 import com.scaffus.survivors.sql.MySQL;
+import com.scaffus.survivors.sql.SQLGetter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +24,7 @@ public final class Survivors extends JavaPlugin {
 
     public MySQL SQL;
     public SurvivorsUtils sUtils;
+    public SQLGetter data;
 
     @Override
     public void onEnable() {
@@ -25,6 +32,7 @@ public final class Survivors extends JavaPlugin {
         saveDefaultConfig();
         this.sUtils = new SurvivorsUtils(this);
         this.SQL = new MySQL();
+        this.data = new SQLGetter(this);
 
         try {
             SQL.connect();
@@ -37,6 +45,12 @@ public final class Survivors extends JavaPlugin {
 
         if (SQL.isConnected()) {
             this.getLogger().info(ChatColor.GREEN + "Database is connected!");
+            try {
+                data.createTable();
+                this.getLogger().info(ChatColor.GREEN + "Table created successfuly in db");
+            } catch (Exception e) {
+                this.getLogger().info(ChatColor.RED + "Failed to create table in db");
+            }
         }
 
         Bukkit.getPluginManager().registerEvents(new SurvivorsEvents(this), this);
@@ -46,8 +60,16 @@ public final class Survivors extends JavaPlugin {
         new MessageCommand(this);
         new ReplyCommand(this);
         new KillCommand(this);
+
         new MuteCommand(this);
         new UnmuteCommand(this);
+
+        new TpaCommand(this);
+        new TpaAcceptCommand(this);
+        new TpaDenyCommand(this);
+
+        new MoneyCommand(this);
+        new PayCommand(this);
         this.getLogger().info(ChatColor.GREEN + "Plugin active avec succes");
     }
 

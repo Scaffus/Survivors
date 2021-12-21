@@ -23,7 +23,9 @@ public class MuteCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args) {
         if (!(sender instanceof Player)) { sender.sendMessage(sUtils.only_player_can_exec); return true; }
         Player p = (Player) sender;
+
         if (!(p.hasPermission("survivors.mute"))) { p.sendMessage(sUtils.no_perm); return true; }
+
         if (args.length >= 1) {
             Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {

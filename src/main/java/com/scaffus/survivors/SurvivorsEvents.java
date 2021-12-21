@@ -1,5 +1,6 @@
 package com.scaffus.survivors;
 
+import com.scaffus.survivors.sql.SQLGetter;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -19,10 +20,12 @@ import java.awt.*;
 public class SurvivorsEvents implements Listener {
     private final Survivors plugin;
     private SurvivorsUtils sUtils;
+    private SQLGetter data;
 
     public SurvivorsEvents(Survivors plugin) {
         this.plugin = plugin;
-        this.sUtils = new SurvivorsUtils(plugin);
+        this.sUtils = plugin.sUtils;
+        this.data = plugin.data;
     }
 
     @EventHandler
@@ -58,6 +61,7 @@ public class SurvivorsEvents implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
+        data.createPlayer(p);
         event.setJoinMessage(sUtils.chat_player_join.replace("%player", p.getName()));
     }
 

@@ -30,8 +30,8 @@ public class SpawnCommand implements CommandExecutor {
             sender.sendMessage(sUtils.only_player_can_exec);
             return true;
         }
-
         Player p = (Player) sender;
+
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("set")) {
                 if (p.hasPermission("survivors.setspawn")) {

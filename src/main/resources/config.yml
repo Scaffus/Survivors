@@ -43,3 +43,31 @@ Mute:
   mute: "%prefix %&6Vous avez rendu %&e%player %&6muet."
   unmute: "%prefix %&6Vous avez rendu le droit de parole à %&e%player."
   muted: "%prefix %&6Envoi du message impossible, vous êtes muet."
+
+Tpa:
+  tpa:
+    usage: "%prefix %&a/tpa %&e<joueur>"
+    sender: "%prefix %&6Vous avez envoyé une demande de téléportation à %&e%target"
+    target: "%prefix %&e%sender %&6vous a envoyé une demande de téléportation, %&b/tpaccept %&6ou %²ab/tpaoui %&6pour l'accepter."
+  accept:
+    usage: "%prefix %&a/tpaccept"
+    sender: "%prefix %&e%target %&6a accepté votre demande de téléportation"
+    target: "%prefix %&6Vous avez accepté la demande de téléportation de %&e%sender"
+  deny:
+    usage: "%prefix %&a/tpadeny"
+    sender: "%prefix %&e%target %&6a refusé votre demande de téléportation"
+    target: "%prefix %&61Vous avez refusé la demande de téléportation de %&e%sender"
+
+Money:
+  money:
+    usage: "%prefix %&a/money"
+    message: "%prefix %&6Vous avez %&b%balance€"
+  pay:
+    usage: "%prefix %&a/pay %&e<joueur> %&b<montant>"
+    sender: "%prefix %&6Vous avez envoyé %&b%amount€ %&6à %&e%target"
+    target: "%prefix %&e%sender %&6vous a envoyé %&b%amount€"
+    notenougmoney: "%prefix %&6Vous n'avez pas assé d'argent."
+    needpositiveammount: "%prefix %&6Le montant envoyé doit être supérieur à 0"
+  add:
+    usage: "%prefix %&a/money %&2add %&e<joueur> %&b<montant>"
+    message: "%prefix %&6Vous avez ajouté %&b%amount€ %&6à la balance de %&e%target"

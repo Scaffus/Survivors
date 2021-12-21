@@ -27,7 +27,10 @@ public class KillCommand implements CommandExecutor {
         }
         Player p = (Player) sender;
 
-        if (!(p.hasPermission("surivors.kill"))) { p.sendMessage(sUtils.no_perm); return true; }
+        if (!(p.hasPermission("surivors.kill"))) {
+            p.sendMessage(sUtils.no_perm);
+            return true;
+        }
 
         if (args.length >= 1) {
             Player target = Bukkit.getPlayer(args[0]);

@@ -31,9 +31,11 @@ public class MessageCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        p.sendMessage("lessafefef");
 
-        if (p.hasPermission("survivors.msg.use")) {
+        if (!(p.hasPermission("survivors.msg.use"))) {
+            p.sendMessage(sUtils.no_perm);
+            return true;
+        }
             if (args.length >= 1) {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null) {
@@ -56,10 +58,6 @@ public class MessageCommand implements CommandExecutor {
                 p.sendMessage(sUtils.msg_msg_usage);
                 return true;
             }
-        } else {
-            p.sendMessage(sUtils.no_perm);
-            return true;
-        }
         return false;
     }
 }
