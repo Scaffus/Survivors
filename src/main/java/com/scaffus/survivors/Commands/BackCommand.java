@@ -18,7 +18,7 @@ public class BackCommand implements CommandExecutor {
 
     public BackCommand(Survivors plugin) {
         this.plugin = plugin;
-        this.sUtils = new SurvivorsUtils(plugin);
+        this.sUtils = this.plugin.sUtils;
         plugin.getCommand("back").setExecutor(this);
     }
 

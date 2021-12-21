@@ -1,12 +1,45 @@
-test: "test"
+test: "%&etest"
 Prefix: "%&8[%&fSurvivors%&8]"
 Error: "%&cUne erreur est survenue, veuillez contacter le staff."
 NoPerm: "%&cVous n'avez pas la permission."
+PlayerNotFound: "%prefix %&e%player %&6n'existe pas ou n'est pas en ligne"
+
+Database:
+  host: "localhost"
+  port: "3306"
+  database: "survivorsdb"
+  user: "root"
+  password: ""
+
+Chat:
+  message: "%rank %&6%player %&8>> %&7%content"
+  player_quit: "%&e%player %&6a quitté."
+  player_join: "%&e%player %&6a rejoint."
+
 Spawn:
-  - location:
-  - usage: "%prefix %&a/spawn"
-  - tped: "%prefix %&6Vous avez été téléporté au spawn."
-  - set: "%prefix %&6Vous avez set le spawn en %&e"
+  usage: "%prefix %&a/spawn"
+  tped: "%prefix %&6Vous avez été téléporté au spawn."
+  set: "%prefix %&6Vous avez set le spawn en %&e"
+  location:
+
 Back:
-  - back: "%prefix %&6Vous avez été téléporté à votre emplacement précédent."
-  - noback: "%prefix %&6Vous n'avez pas de point de téléportation précédent."
+  back: "%prefix %&6Vous avez été téléporté à votre emplacement précédent."
+  noback: "%prefix %&6Vous n'avez pas de point de téléportation précédent."
+
+Message:
+  sender_view: "%&7%&oA %&f%&n%&o%target%&8%&o >> %&7%&o%message"
+  receiver_view: "%&7%&oDe %&f%&n%&o%sender%&8%&o >> %&7%&o%message"
+  message:
+    usage: "%prefix %&a/msg %&e<joueur> %&4<message>"
+  respond:
+    usage: "%prefix %&a/r %&4<message>"
+
+Kill:
+  usage: "%prefix %&a/kill %&e<joueur>"
+  kill: "%prefix %&6Vous avez tué %&e%player"
+
+Mute:
+  usage: "%prefix %&a/mute %&e<player>"
+  mute: "%prefix %&6Vous avez rendu %&e%player %&6muet."
+  unmute: "%prefix %&6Vous avez rendu le droit de parole à %&e%player."
+  muted: "%prefix %&6Envoi du message impossible, vous êtes muet."

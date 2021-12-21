@@ -1,32 +1,131 @@
 package com.scaffus.survivors;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class SurvivorsUtils {
 
-    private Survivors plugin;
+    private final Survivors plugin;
     public final String prefix;
     public final String error;
     public final String no_perm;
-    public final String usage_spawn;
+    public final String spawn_usage;
     public final String spawn_tped;
     public final String spawn_set;
     public final String test;
     public final String back_back;
     public final String back_noback;
     public final String only_player_can_exec;
+    public final String msg_msg_usage;
+    public final String msg_r_usage;
+    public final String player_not_found;
+    public final String msg_view_sender;
+    public final String msg_view_receiver;
+    public final String kill_usage;
+    public final String kill_kill;
+    public final String mute_usage;
+    public final String mute_mute;
+    public final String mute_muted;
+    public final String mute_unmute;
+    public final String chat_message_format;
+    public final String chat_player_join;
+    public final String chat_player_quit;
+    public final String database_host;
+    public final String database_database;
+    public final String database_port;
+    public final String database_username;
+    public final String database_password;
+    private Object NullPointerException;
 
     public SurvivorsUtils(Survivors plugin) {
         this.plugin = plugin;
-        this.test = plugin.getConfig().get("test").toString();
-        this.prefix = plugin.getConfig().get("Prefix").toString().replace("%&", "§");
-        this.error = plugin.getConfig().get("Error").toString().replace("%&", "§").replace("%prefix", this.prefix);
-        this.no_perm = plugin.getConfig().get("NoPerm").toString().replace("%&", "§").replace("%prefix", this.prefix);
-        this.usage_spawn = plugin.getConfig().get("Spawn.usage").toString().replace("%&", "§").replace("%prefix", this.prefix);
-        this.spawn_tped = plugin.getConfig().get("Spawn.tped").toString().replace("%&", "§").replace("%prefix", this.prefix);
-        this.spawn_set = plugin.getConfig().get("Spawn.set").toString().replace("%&", "§").replace("%prefix", this.prefix);
-        this.back_back = plugin.getConfig().get("Back.back").toString().replace("%&", "§").replace("%prefix", this.prefix);
-        this.back_noback = plugin.getConfig().get("Back.boback").toString().replace("%&", "§").replace("%prefix", this.prefix);
+        this.test = plugin.getConfig().getString("test");
+        //this.prefix = plugin.getConfig().getString("Prefix").replace("%&", "§");
+        //this.error = plugin.getConfig().getString("Error").replace("%&", "§").replace("%prefix", this.prefix);
+        //this.no_perm = plugin.getConfig().getString("NoPerm").replace("%&", "§").replace("%prefix", this.prefix);
+        //this.spawn_usage = plugin.getConfig().getString("Spawn.usage").replace("%&", "§").replace("%prefix", this.prefix);
+        //this.spawn_tped = plugin.getConfig().getString("Spawn.tped").replace("%&", "§").replace("%prefix", this.prefix);
+        //this.spawn_set = plugin.getConfig().getString("Spawn.set").replace("%&", "§").replace("%prefix", this.prefix);
+        //this.back_back = plugin.getConfig().getString("Back.back").replace("%&", "§").replace("%prefix", this.prefix);
+        //this.back_noback = plugin.getConfig().getString("Back.noback").replace("%&", "§").replace("%prefix", this.prefix);
+        // database
+        this.database_host = getFromConfig("Database.host");
+        this.database_database = getFromConfig("Database.database");
+        this.database_port = getFromConfig("Database.port");
+        this.database_username = getFromConfig("Database.username");
+        this.database_password = getFromConfig("Database.password");
+
+        // general
+        this.prefix = getFromConfig("Prefix").replace("%&", "§");
+        this.error = getFromConfigAndFormat("Error");
+        this.no_perm = getFromConfigAndFormat("NoPerm");
         this.only_player_can_exec = ChatColor.RED + "Seul un joueur peut executer cette commande.";
+        this.player_not_found = getFromConfigAndFormat("PlayerNotFound");
+
+        // chat
+        this.chat_message_format = getFromConfigAndFormat("Chat.message");
+        this.chat_player_quit = getFromConfigAndFormat("Chat.player_quit");
+        this.chat_player_join = getFromConfigAndFormat("Chat.player_join");
+
+        // /spawn messages
+        this.spawn_usage = getFromConfigAndFormat("Spawn.usage");
+        this.spawn_tped = getFromConfigAndFormat("Spawn.tped");
+        this.spawn_set = getFromConfigAndFormat("Spawn.set");
+
+        // /back messages
+        this.back_back = getFromConfigAndFormat("Back.back");
+        this.back_noback = getFromConfigAndFormat("Back.no_back");
+
+        // /msg & /r messages
+        this.msg_msg_usage = getFromConfigAndFormat("Message.message.usage");
+        this.msg_r_usage = getFromConfigAndFormat("Message.respond.usage");
+        this.msg_view_sender = getFromConfigAndFormat("Message.sender_view");
+        this.msg_view_receiver = getFromConfigAndFormat("Message.receiver_view");
+
+        // /kill messages
+        this.kill_usage = getFromConfigAndFormat("Kill.usage");
+        this.kill_kill = getFromConfigAndFormat("Kill.kill");
+
+        // /mute messages
+        this.mute_usage = getFromConfigAndFormat("Mute.usage");
+        this.mute_mute = getFromConfigAndFormat("Mute.mute");
+        this.mute_unmute = getFromConfigAndFormat("Mute.unmute");
+        this.mute_muted = getFromConfigAndFormat("Mute.muted");
+    }
+
+    private String formatMessage(String str) {
+        try {
+            str = str.replace("%&", "§").replace("%prefix", this.prefix);
+        } catch (NullPointerException e) {
+//            plugin.getLogger().info("nullpointexecption formatMessage");
+        }
+        return str;
+    }
+
+    public String getFromConfig(String path) {
+        String str;
+        try {
+            str = plugin.getConfig().getString(path);
+        } catch (Exception e) {
+            plugin.getLogger().info(ChatColor.RED + e.toString());
+            str = "failed to load from config";
+        }
+        return str;
+    }
+
+    public String getFromConfigAndFormat(String path) {
+        String message;
+        try {
+            //message = plugin.getConfig().getString(path).replace("%&", "§").replace("%prefix", this.prefix);
+            message = getFromConfig(path);
+            message = formatMessage(message);
+        } catch (Exception e) {
+            plugin.getLogger().info(ChatColor.RED + e.toString());
+            message = "failed to load or to format";
+        }
+        return message;
     }
 }

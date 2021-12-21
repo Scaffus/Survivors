@@ -20,7 +20,7 @@ public class SpawnCommand implements CommandExecutor {
 
     public SpawnCommand(Survivors plugin) {
         this.plugin = plugin;
-        this.sUtils = new SurvivorsUtils(plugin);
+        this.sUtils = this.plugin.sUtils;
         plugin.getCommand("spawn").setExecutor(this);
     }
 
@@ -39,10 +39,11 @@ public class SpawnCommand implements CommandExecutor {
                     pLoc.setPitch(0);
                     pLoc.setYaw(0);
                     plugin.getConfig().set("Spawn.location", pLoc);
+                    plugin.saveConfig();
                     p.sendMessage(sUtils.spawn_set + pLoc.getBlock());
                 }
             }
-        } else if (plugin.getConfig().getLocation("Spawn") != null) {
+        } else if (plugin.getConfig().getLocation("Spawn.location") != null) {
                 if (p.hasPermission("survivors.spawn")) {
                     p.teleport((Location) Objects.requireNonNull(plugin.getConfig().getLocation("Spawn.location")));
                     p.sendMessage(sUtils.spawn_tped);

@@ -3,17 +3,35 @@ version: '${project.version}'
 main: com.scaffus.survivors.Survivors
 api-version: 1.18
 authors: [ Scaffus ]
-description: Paper plugin for survivos
+description: Paper plugin for survivors smp
 website: https://www.youtube.com/channel/UC4-uJde_HISRyfOKKtVEkCQ
 
 commands:
   spawn:
     aliases: []
     description: Teleporte le joueur au spawn
-  setspawn:
-    description: Set le spawn du monde
+    #usage: /spawn [set]
   test:
     description: commande test
+    #usage: /test
   reloadconfig:
     aliases: [rlconfig, rlc, reloadc]
     description: Rercharge la config
+    #: /rlc, /rlconfig, /reloadc, /reloadconfig
+  msg:
+    aliases: [message, tell]
+    description: Envois de messages privés
+    #usage: /msg <target_player> <message>
+  r:
+    aliases: [repondre, répondre, reply]
+    description: Répondre à un message privé
+    #usage: /r <message>
+  kill:
+    aliases: [tuer]
+    description: Tue un joueur donné
+  mute:
+    aliases: [tg]
+    description: Rend un joueur donné muet
+  unmute:
+    aliases: []
+    description: Rend la parole à un joueur donné

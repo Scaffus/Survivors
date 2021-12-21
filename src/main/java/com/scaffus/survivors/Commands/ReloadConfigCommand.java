@@ -17,7 +17,7 @@ public class ReloadConfigCommand implements CommandExecutor {
     public ReloadConfigCommand(Survivors plugin) {
         this.plugin = plugin;
         plugin.getCommand("reloadconfig").setExecutor(this);
-        this.sUtils = new SurvivorsUtils(plugin);
+        this.sUtils = this.plugin.sUtils;
     }
 
     @Override
@@ -27,7 +27,8 @@ public class ReloadConfigCommand implements CommandExecutor {
             return true;}
         Player p = (Player) sender;
         if (p.hasPermission("survivors.reloadconfig")) {
-            p.sendMessage(sUtils.prefix + ChatColor.GOLD + " La config a été reload. (enfait non, jsp comment faire)");
+            plugin.reloadConfig();
+            p.sendMessage(sUtils.prefix + ChatColor.GOLD + " La config a été reload.");
         }
         return false;
     }

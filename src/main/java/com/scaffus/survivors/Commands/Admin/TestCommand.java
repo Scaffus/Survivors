@@ -1,4 +1,4 @@
-package com.scaffus.survivors.Commands;
+package com.scaffus.survivors.Commands.Admin;
 
 import com.scaffus.survivors.Survivors;
 import com.scaffus.survivors.SurvivorsUtils;
@@ -15,8 +15,8 @@ public class TestCommand implements CommandExecutor {
 
     public TestCommand(Survivors plugin) {
         this.plugin = plugin;
+        this.sUtils = this.plugin.sUtils;
         plugin.getCommand("test").setExecutor(this);
-        this.sUtils = new SurvivorsUtils(plugin);
     }
 
     @Override
