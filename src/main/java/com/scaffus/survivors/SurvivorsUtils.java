@@ -9,36 +9,60 @@ import java.util.List;
 public class SurvivorsUtils {
 
     private final Survivors plugin;
+    public final String player_not_found;
     public final String prefix;
     public final String error;
     public final String no_perm;
+    public final String test;
+    public final String only_player_can_exec;
+
+    // spawn
     public final String spawn_usage;
     public final String spawn_tped;
     public final String spawn_set;
-    public final String test;
+
+    // back
     public final String back_back;
     public final String back_noback;
-    public final String only_player_can_exec;
+
+    // msg
     public final String msg_msg_usage;
     public final String msg_r_usage;
-    public final String player_not_found;
     public final String msg_view_sender;
     public final String msg_view_receiver;
+
+    // kill
     public final String kill_usage;
     public final String kill_kill;
+
+    // mute
     public final String mute_usage;
     public final String mute_mute;
     public final String mute_muted;
     public final String mute_unmute;
+
+    // chat
     public final String chat_message_format;
     public final String chat_player_join;
     public final String chat_player_quit;
+
+    // database
     public final String database_host;
     public final String database_database;
     public final String database_port;
     public final String database_username;
     public final String database_password;
-    private Object NullPointerException;
+
+    // tpa
+    public final String tpa_usage;
+    public final String tpa_view_sender;
+    public final String tpa_view_target;
+    public final String tpa_deny_usage;
+    public final String tpa_deny_sender;
+    public final String tpa_deny_target;
+    public final String tpa_accept_usage;
+    public final String tpa_accept_sender;
+    public final String tpa_accept_target;
 
     public SurvivorsUtils(Survivors plugin) {
         this.plugin = plugin;
@@ -94,9 +118,22 @@ public class SurvivorsUtils {
         this.mute_mute = getFromConfigAndFormat("Mute.mute");
         this.mute_unmute = getFromConfigAndFormat("Mute.unmute");
         this.mute_muted = getFromConfigAndFormat("Mute.muted");
+
+        // /tpa
+        this.tpa_usage = getFromConfigAndFormat("Tpa.tpa.usage");
+        this.tpa_view_sender = getFromConfigAndFormat("Tpa.tpa.sender");
+        this.tpa_view_target = getFromConfigAndFormat("Tpa.tpa.target");
+
+        this.tpa_accept_usage = getFromConfigAndFormat("Tpa.tpaccept.usage");
+        this.tpa_accept_sender = getFromConfigAndFormat("Tpa.accept.sender");
+        this.tpa_accept_target = getFromConfigAndFormat("Tpa.accept.target");
+
+        this.tpa_deny_usage = getFromConfigAndFormat("Tpa.adeny.usage");
+        this.tpa_deny_sender = getFromConfigAndFormat("Tpa.adeny.sender");
+        this.tpa_deny_target = getFromConfigAndFormat("Tpa.adeny.target");
     }
 
-    private String formatMessage(String str) {
+    public String formatMessage(String str) {
         try {
             str = str.replace("%&", "§").replace("%prefix", this.prefix);
         } catch (NullPointerException e) {
