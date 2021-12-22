@@ -53,3 +53,6 @@ commands:
   pay:
     aliases: [payer]
     description: Paie un joueur donné d'un montant donné
+  shop:
+    aliases: [boutique]
+    description: Ouvre le shop au joueur

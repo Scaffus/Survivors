@@ -2,6 +2,7 @@ package com.scaffus.survivors.Commands;
 
 import com.scaffus.survivors.Survivors;
 import com.scaffus.survivors.SurvivorsUtils;
+import com.scaffus.survivors.sql.SQLGetter;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -15,12 +16,14 @@ import java.util.Objects;
 
 public class SpawnCommand implements CommandExecutor {
 
-    private Survivors plugin;
+    private final Survivors plugin;
     private final SurvivorsUtils sUtils;
+    private final SQLGetter data;
 
     public SpawnCommand(Survivors plugin) {
         this.plugin = plugin;
         this.sUtils = this.plugin.sUtils;
+        this.data = plugin.data;
         plugin.getCommand("spawn").setExecutor(this);
     }
 
@@ -32,22 +35,25 @@ public class SpawnCommand implements CommandExecutor {
         }
         Player p = (Player) sender;
 
+        if (!(p.hasPermission("survivors.spawn.use"))) {
+            p.sendMessage(sUtils.no_perm);
+            return true;
+        }
+
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("set")) {
-                if (p.hasPermission("survivors.setspawn")) {
-                    Location pLoc = p.getLocation();
-                    pLoc.setPitch(0);
-                    pLoc.setYaw(0);
-                    plugin.getConfig().set("Spawn.location", pLoc);
-                    plugin.saveConfig();
-                    p.sendMessage(sUtils.spawn_set + pLoc.getBlock());
+                if (p.hasPermission("survivors.spawn.set")) {
+                    data.setSpawn(p.getLocation());
+                    p.sendMessage(sUtils.spawn_set + p.getLocation());
                 }
             }
-        } else if (plugin.getConfig().getLocation("Spawn.location") != null) {
-                if (p.hasPermission("survivors.spawn")) {
-                    p.teleport((Location) Objects.requireNonNull(plugin.getConfig().getLocation("Spawn.location")));
-                    p.sendMessage(sUtils.spawn_tped);
-                }
+        } else if (data.getSpawn(p.getLocation()) != null) {
+            
+//        else if (plugin.getConfig().getLocation("Spawn.location") != null) {
+//                if (p.hasPermission("survivors.spawn")) {
+//                    p.teleport((Location) Objects.requireNonNull(plugin.getConfig().getLocation("Spawn.location")));
+//                    p.sendMessage(sUtils.spawn_tped);
+//                }
         } else {
             p.sendMessage("else");
         }

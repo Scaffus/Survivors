@@ -12,6 +12,7 @@ import com.scaffus.survivors.Commands.Money.PayCommand;
 import com.scaffus.survivors.Commands.Tp.TpaAcceptCommand;
 import com.scaffus.survivors.Commands.Tp.TpaCommand;
 import com.scaffus.survivors.Commands.Tp.TpaDenyCommand;
+import com.scaffus.survivors.events.GuiEvents;
 import com.scaffus.survivors.sql.MySQL;
 import com.scaffus.survivors.sql.SQLGetter;
 import org.bukkit.Bukkit;
@@ -46,7 +47,8 @@ public final class Survivors extends JavaPlugin {
         if (SQL.isConnected()) {
             this.getLogger().info(ChatColor.GREEN + "Database is connected!");
             try {
-                data.createTable();
+                data.createTable("survivors", "NAME VARCHAR(100), MONEY INT(255), UUID VARCHAR(100)", "NAME");
+                data.createTable("locations spawn", "SPAWN_X INT(100), SPAWN_Y INT(100), SPAWN_Z INT(100), SPAWN_WORLD VARCHAR(100)", "SPAWN_WORLD");
                 this.getLogger().info(ChatColor.GREEN + "Table created successfuly in db");
             } catch (Exception e) {
                 this.getLogger().info(ChatColor.RED + "Failed to create table in db");
@@ -54,6 +56,7 @@ public final class Survivors extends JavaPlugin {
         }
 
         Bukkit.getPluginManager().registerEvents(new SurvivorsEvents(this), this);
+        Bukkit.getPluginManager().registerEvents(new GuiEvents(this), this);
         new SpawnCommand(this);
         new TestCommand(this);
         new ReloadConfigCommand(this);
@@ -70,6 +73,8 @@ public final class Survivors extends JavaPlugin {
 
         new MoneyCommand(this);
         new PayCommand(this);
+
+        new ShopCommand(this);
         this.getLogger().info(ChatColor.GREEN + "Plugin active avec succes");
     }
 

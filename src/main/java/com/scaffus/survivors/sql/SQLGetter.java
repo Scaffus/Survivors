@@ -1,11 +1,14 @@
 package com.scaffus.survivors.sql;
 
 import com.scaffus.survivors.Survivors;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class SQLGetter {
@@ -28,10 +31,10 @@ public class SQLGetter {
         return ps;
     }
 
-    public void createTable() {
+    public void createTable(String table, String table_content, String primary_key) {
         PreparedStatement ps;
         try {
-            ps = pS("CREATE TABLE IF NOT EXISTS survivors (NAME VARCHAR(100), UUID VARCHAR(100), MONEY INT(255), PRIMARY KEY (NAME))");
+            ps = pS("CREATE TABLE IF NOT EXISTS" + table + "(" + table_content + "), PRIMARY KEY (" + primary_key + "))");
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,9 +104,50 @@ public class SQLGetter {
         return 0;
     }
 
-    public void emptyTable() {
+    public void setSpawn(Location location) {
         try {
-            PreparedStatement ps = pS("TRUNCATE survivors");
+            int spawn_x = location.getBlockX();
+            int spawn_y = location.getBlockY();
+            int spawn_z = location.getBlockZ();
+            String spawn_world = location.getWorld().toString();
+            PreparedStatement ps = pS("UPDATE locations spawn SET SPAWN_X=? SPAWN_Y=? SPAWN_Z=? WORLD=?");
+            ps.setInt(1, spawn_x);
+            ps.setInt(2, spawn_y);
+            ps.setInt(3, spawn_z);
+            ps.setString(4, spawn_world);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Integer> getSpawn(Location location) {
+        List<Integer> spawncoords = new ArrayList<Integer>();
+        try {
+            PreparedStatement ps = pS("SELECT SPAWN_X SPAWN_Y SPAWN_Z FROM locations spawns WHERE SPAWN_WORLD=?");
+            ps.setString(1, location.getWorld().toString());
+            int spawn_x = 0;
+            int spawn_y = 0;
+            int spawn_z = 0;
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                spawn_x = rs.getInt("SPAWN_X");
+                spawn_y = rs.getInt("SPAWN_Y");
+                spawn_z = rs.getInt("SPAWN_Z");
+                spawncoords.add(spawn_x);
+                spawncoords.add(spawn_y);
+                spawncoords.add(spawn_z);
+                return spawncoords;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void emptyTable(String table) {
+        try {
+            PreparedStatement ps = pS("TRUNCATE " + table);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
