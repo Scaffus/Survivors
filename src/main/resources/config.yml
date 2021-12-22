@@ -53,6 +53,7 @@ Tpa:
     usage: "%prefix %&a/tpaccept"
     sender: "%prefix %&e%target %&6a accepté votre demande de téléportation"
     target: "%prefix %&6Vous avez accepté la demande de téléportation de %&e%sender"
+    norequest: "%prefix %&6Vous n'avez pas de requête de téléportation  "
   deny:
     usage: "%prefix %&a/tpadeny"
     sender: "%prefix %&e%target %&6a refusé votre demande de téléportation"

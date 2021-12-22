@@ -63,6 +63,7 @@ public class SurvivorsUtils {
     public final String tpa_accept_usage;
     public final String tpa_accept_sender;
     public final String tpa_accept_target;
+    public final String tpa_accept_norequest;
 
     // money
     public final String money_money_usage;
@@ -130,6 +131,7 @@ public class SurvivorsUtils {
         this.tpa_accept_usage = getFromConfigAndFormat("Tpa.tpaccept.usage");
         this.tpa_accept_sender = getFromConfigAndFormat("Tpa.accept.sender");
         this.tpa_accept_target = getFromConfigAndFormat("Tpa.accept.target");
+        this.tpa_accept_norequest = getFromConfig("Tpa.accept.norequest");
 
         this.tpa_deny_usage = getFromConfigAndFormat("Tpa.deny.usage");
         this.tpa_deny_sender = getFromConfigAndFormat("Tpa.deny.sender");

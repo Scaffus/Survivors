@@ -42,6 +42,8 @@ public class TpaAcceptCommand implements CommandExecutor {
             Location target_location = target.getLocation().toBlockLocation();
             p.teleport(target_location);
             tpa.remove(target);
+        } else {
+            target.sendMessage(sUtils.tpa_accept_norequest);
         }
         return false;
     }

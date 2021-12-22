@@ -48,7 +48,7 @@ public final class Survivors extends JavaPlugin {
             this.getLogger().info(ChatColor.GREEN + "Database is connected!");
             try {
                 data.createTable("survivors", "NAME VARCHAR(100), MONEY INT(255), UUID VARCHAR(100)", "NAME");
-                data.createTable("locations spawn", "SPAWN_X INT(100), SPAWN_Y INT(100), SPAWN_Z INT(100), SPAWN_WORLD VARCHAR(100)", "SPAWN_WORLD");
+                data.createTable("locations", "LOCATION_X INT(100), LOCATION_Y INT(100), LOCATION_Z INT(100), LOCATION_WORLD VARCHAR(100), LOCATION_TYPE INT(100)   ", "LOCATION_TYPE");
                 this.getLogger().info(ChatColor.GREEN + "Table created successfuly in db");
             } catch (Exception e) {
                 this.getLogger().info(ChatColor.RED + "Failed to create table in db");
