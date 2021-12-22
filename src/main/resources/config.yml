@@ -48,7 +48,7 @@ Tpa:
   tpa:
     usage: "%prefix %&a/tpa %&e<joueur>"
     sender: "%prefix %&6Vous avez envoyé une demande de téléportation à %&e%target"
-    target: "%prefix %&e%sender %&6vous a envoyé une demande de téléportation, %&b/tpaccept %&6ou %²ab/tpaoui %&6pour l'accepter."
+    target: "%prefix %&e%sender %&6vous a envoyé une demande de téléportation, %&b/tpaccept %&6ou %&b/tpaoui %&6pour l'accepter."
   accept:
     usage: "%prefix %&a/tpaccept"
     sender: "%prefix %&e%target %&6a accepté votre demande de téléportation"

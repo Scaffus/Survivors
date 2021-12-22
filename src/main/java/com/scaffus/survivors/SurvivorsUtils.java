@@ -131,7 +131,7 @@ public class SurvivorsUtils {
         this.tpa_accept_usage = getFromConfigAndFormat("Tpa.tpaccept.usage");
         this.tpa_accept_sender = getFromConfigAndFormat("Tpa.accept.sender");
         this.tpa_accept_target = getFromConfigAndFormat("Tpa.accept.target");
-        this.tpa_accept_norequest = getFromConfig("Tpa.accept.norequest");
+        this.tpa_accept_norequest = getFromConfigAndFormat("Tpa.accept.norequest");
 
         this.tpa_deny_usage = getFromConfigAndFormat("Tpa.deny.usage");
         this.tpa_deny_sender = getFromConfigAndFormat("Tpa.deny.sender");

@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
+import org.checkerframework.checker.regex.qual.Regex;
 
 import java.awt.*;
 
@@ -47,14 +48,24 @@ public class SurvivorsEvents implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
         Player p = event.getPlayer();
+        event.setCancelled(true);
         if (plugin.getConfig().getBoolean("Mute.muted_players." + p.getUniqueId().toString())) {
-            event.setCancelled(true);
             p.sendMessage(sUtils.mute_muted);
         } else {
-            event.setCancelled(true);
             String message_content = event.getMessage();
             String message = sUtils.chat_message_format.replace("%player", p.getName()).replace("%content", message_content).replace("%rank", "§7[Gamer]");
-            Bukkit.broadcast(TextComponentBuilder.createTextComponent(message));
+            if (p.hasPermission("survivors.chat.color")) {
+                String letters = "o n m l k a e b d f c";
+                for (int i = 0; i < 9; i++) {
+                    message = message.replace("&" + i, "§" +i);
+                }
+                for (String character : letters.split(" ")) {
+                    message = message.replace("&" + character, "§" + character);
+                }
+                Bukkit.broadcast(TextComponentBuilder.createTextComponent(message));
+            } else {
+                Bukkit.broadcast(TextComponentBuilder.createTextComponent(message));
+            }
         }
     }
 
