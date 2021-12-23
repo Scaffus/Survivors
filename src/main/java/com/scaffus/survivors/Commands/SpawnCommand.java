@@ -46,12 +46,12 @@ public class SpawnCommand implements CommandExecutor {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("set")) {
                 if (p.hasPermission("survivors.spawn.set")) {
-                    data.setLocation(p.getLocation(), 1);
+                    data.setLocation(p.getLocation(), "spawn", 1);
                     p.sendMessage(sUtils.spawn_set + p.getLocation());
                 }
             }
         } else {
-            HashMap<String, Integer> coords = data.getLocation(p.getLocation(), 1);
+            HashMap<String, Integer> coords = data.getLocation(p.getLocation(), "spawn", 1);
             if (coords != null) {
                 int spawn_x = coords.get("location_x");
                 int spawn_y = coords.get("location_y");
@@ -61,6 +61,7 @@ public class SpawnCommand implements CommandExecutor {
                 pLoc.setPitch(0);
                 pLoc.set(spawn_x, spawn_y, spawn_z);
                 p.teleport(pLoc);
+                p.sendMessage(sUtils.spawn_tped);
             } else {
                 p.sendMessage("not set");
             }

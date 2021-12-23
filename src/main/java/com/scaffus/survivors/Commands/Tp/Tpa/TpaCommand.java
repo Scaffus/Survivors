@@ -1,4 +1,4 @@
-package com.scaffus.survivors.Commands.Tp;
+package com.scaffus.survivors.Commands.Tp.Tpa;
 
 import com.scaffus.survivors.Survivors;
 import com.scaffus.survivors.SurvivorsUtils;

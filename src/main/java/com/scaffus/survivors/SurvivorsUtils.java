@@ -3,6 +3,8 @@ package com.scaffus.survivors;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,6 +42,9 @@ public class SurvivorsUtils {
     public final String mute_mute;
     public final String mute_muted;
     public final String mute_unmute;
+    public final String mute_wasnotmuted;
+    public final String mute_unmuted;
+    public final String mute_alreadymuted;
 
     // chat
     public final String chat_message_format;
@@ -76,6 +81,22 @@ public class SurvivorsUtils {
     public final String money_add_usage;
     public final String money_add_message;
 
+    // warp
+    public final String setwarp_usage;
+    public final String setwarp_set;
+
+    public final String warp_usage;
+    public final String warp_dontexist;
+    public final String warp_tped;
+
+    // invsee
+    public final String invsee_usage;
+
+    // rank
+    public final String rank_usage;
+    public final String rank_set_message;
+    public final String rank_get_message;
+
     public SurvivorsUtils(Survivors plugin) {
         this.plugin = plugin;
         this.test = plugin.getConfig().getString("test");
@@ -99,7 +120,7 @@ public class SurvivorsUtils {
         this.chat_player_join = getFromConfigAndFormat("Chat.player_join");
 
         // /spawn messages
-        this.spawn_usage = getFromConfigAndFormat("Spawn.usage");
+        this.spawn_usage = formatMessage("%prefix %&a/spawn");
         this.spawn_tped = getFromConfigAndFormat("Spawn.tped");
         this.spawn_set = getFromConfigAndFormat("Spawn.set");
 
@@ -108,47 +129,67 @@ public class SurvivorsUtils {
         this.back_noback = getFromConfigAndFormat("Back.no_back");
 
         // /msg & /r messages
-        this.msg_msg_usage = getFromConfigAndFormat("Message.message.usage");
-        this.msg_r_usage = getFromConfigAndFormat("Message.respond.usage");
+        this.msg_msg_usage = formatMessage("%prefix %&a/msg %&e<joueur> %&4<message>");
+        this.msg_r_usage = formatMessage("%prefix %&a/r %&4<message>");
         this.msg_view_sender = getFromConfigAndFormat("Message.sender_view");
         this.msg_view_receiver = getFromConfigAndFormat("Message.receiver_view");
 
         // /kill messages
-        this.kill_usage = getFromConfigAndFormat("Kill.usage");
+        this.kill_usage = formatMessage("%prefix %&a/kill %&e<joueur>");
         this.kill_kill = getFromConfigAndFormat("Kill.kill");
 
         // /mute messages
-        this.mute_usage = getFromConfigAndFormat("Mute.usage");
+        this.mute_usage = formatMessage("%prefix %&a/mute %&e<player>");
         this.mute_mute = getFromConfigAndFormat("Mute.mute");
         this.mute_unmute = getFromConfigAndFormat("Mute.unmute");
         this.mute_muted = getFromConfigAndFormat("Mute.muted");
+        this.mute_wasnotmuted = getFromConfigAndFormat("Mute.wasnotmuted");
+        this.mute_unmuted = getFromConfigAndFormat("Mute.unmuted");
+        this.mute_alreadymuted = getFromConfigAndFormat("Mute.alreadymuted");
 
         // /tpa
-        this.tpa_usage = getFromConfigAndFormat("Tpa.tpa.usage");
+        this.tpa_usage = formatMessage( "%prefix %&a/tpa %&e<joueur>");
         this.tpa_view_sender = getFromConfigAndFormat("Tpa.tpa.sender");
         this.tpa_view_target = getFromConfigAndFormat("Tpa.tpa.target");
 
-        this.tpa_accept_usage = getFromConfigAndFormat("Tpa.tpaccept.usage");
+        this.tpa_accept_usage = formatMessage("%prefix %&a/tpaccept");
         this.tpa_accept_sender = getFromConfigAndFormat("Tpa.accept.sender");
         this.tpa_accept_target = getFromConfigAndFormat("Tpa.accept.target");
         this.tpa_accept_norequest = getFromConfigAndFormat("Tpa.accept.norequest");
 
-        this.tpa_deny_usage = getFromConfigAndFormat("Tpa.deny.usage");
+        this.tpa_deny_usage = formatMessage("%prefix %&a/tpadeny");
         this.tpa_deny_sender = getFromConfigAndFormat("Tpa.deny.sender");
         this.tpa_deny_target = getFromConfigAndFormat("Tpa.deny.target");
 
         // /money
-        this.money_money_usage = getFromConfigAndFormat("Money.money.usage");
+        this.money_money_usage = formatMessage("%prefix %&a/money");
         this.money_money_message = getFromConfigAndFormat("Money.money.message");
 
-        this.money_pay_usage = getFromConfigAndFormat("Money.pay.usage");
+        this.money_pay_usage = formatMessage("%prefix %&a/pay %&e<joueur> %&b<montant>");
         this.money_pay_view_sender = getFromConfigAndFormat("Money.pay.sender");
         this.money_pay_view_target = getFromConfigAndFormat("Money.pay.target");
         this.money_pay_notenoughmoney = getFromConfigAndFormat("Money.pay.notenougmoney");
         this.money_pay_needpositiveammount = getFromConfigAndFormat("Money.pay.needpositiveammount");
 
-        this.money_add_usage = getFromConfigAndFormat("Money.add.usage");
+        this.money_add_usage = formatMessage("%prefix %&a/money %&2add %&e<joueur> %&b<montant>");
         this.money_add_message = getFromConfigAndFormat("Money.add.message");
+
+        // /setwarp
+        this.setwarp_usage = formatMessage("%prefix %&a/setwarp %&3<nom>");
+        this.setwarp_set = getFromConfigAndFormat("Warp.set.set");
+
+        // /warp
+        this.warp_usage = formatMessage("%prefix %&a/warp %&3<nom>");
+        this.warp_tped = getFromConfigAndFormat("Warp.warp.tped");
+        this.warp_dontexist = getFromConfigAndFormat("Warp.warp.dontexist");
+
+        // /invsee
+        this.invsee_usage = formatMessage("%prefix %&a/invsee %&ejoueur");
+
+        // /rank
+        this.rank_usage = formatMessage("%prefix %&a/rank %&b<set|get> %&e<joueur>");
+        this.rank_set_message = getFromConfigAndFormat("Rank.set");
+        this.rank_get_message = getFromConfigAndFormat("Rank.get");
     }
 
     public String formatMessage(String str) {
@@ -183,4 +224,6 @@ public class SurvivorsUtils {
         }
         return message;
     }
+
+
 }

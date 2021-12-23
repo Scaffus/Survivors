@@ -17,10 +17,8 @@ Chat:
   player_join: "%&e%player %&6a rejoint."
 
 Spawn:
-  usage: "%prefix %&a/spawn"
   tped: "%prefix %&6Vous avez été téléporté au spawn."
   set: "%prefix %&6Vous avez set le spawn en %&e"
-  location:
 
 Back:
   back: "%prefix %&6Vous avez été téléporté à votre emplacement précédent."
@@ -29,46 +27,49 @@ Back:
 Message:
   sender_view: "%&7%&oA %&f%&n%&o%target%&8%&o >> %&7%&o%message"
   receiver_view: "%&7%&oDe %&f%&n%&o%sender%&8%&o >> %&7%&o%message"
-  message:
-    usage: "%prefix %&a/msg %&e<joueur> %&4<message>"
-  respond:
-    usage: "%prefix %&a/r %&4<message>"
 
 Kill:
-  usage: "%prefix %&a/kill %&e<joueur>"
   kill: "%prefix %&6Vous avez tué %&e%player"
 
 Mute:
-  usage: "%prefix %&a/mute %&e<player>"
-  mute: "%prefix %&6Vous avez rendu %&e%player %&6muet."
-  unmute: "%prefix %&6Vous avez rendu le droit de parole à %&e%player."
+  mute: "%prefix %&6Vous avez rendu %&e%target %&6muet."
+  unmute: "%prefix %&6Vous avez rendu le droit de parole à %&e%target."
   muted: "%prefix %&6Envoi du message impossible, vous êtes muet."
+  unmuted: "%prefix %&6Vous avez retrouvé la parole"
+  alreadymuted: "%prefix %&e%target %&6est déjà muet"
+  wasnotmuted: "%prefix %&e%target %&6a déjà le droit de parole."
 
 Tpa:
   tpa:
-    usage: "%prefix %&a/tpa %&e<joueur>"
     sender: "%prefix %&6Vous avez envoyé une demande de téléportation à %&e%target"
     target: "%prefix %&e%sender %&6vous a envoyé une demande de téléportation, %&b/tpaccept %&6ou %&b/tpaoui %&6pour l'accepter."
   accept:
-    usage: "%prefix %&a/tpaccept"
     sender: "%prefix %&e%target %&6a accepté votre demande de téléportation"
     target: "%prefix %&6Vous avez accepté la demande de téléportation de %&e%sender"
     norequest: "%prefix %&6Vous n'avez pas de requête de téléportation  "
   deny:
-    usage: "%prefix %&a/tpadeny"
     sender: "%prefix %&e%target %&6a refusé votre demande de téléportation"
     target: "%prefix %&61Vous avez refusé la demande de téléportation de %&e%sender"
 
 Money:
   money:
-    usage: "%prefix %&a/money"
     message: "%prefix %&6Vous avez %&b%balance€"
   pay:
-    usage: "%prefix %&a/pay %&e<joueur> %&b<montant>"
     sender: "%prefix %&6Vous avez envoyé %&b%amount€ %&6à %&e%target"
     target: "%prefix %&e%sender %&6vous a envoyé %&b%amount€"
     notenougmoney: "%prefix %&6Vous n'avez pas assé d'argent."
     needpositiveammount: "%prefix %&6Le montant envoyé doit être supérieur à 0"
   add:
-    usage: "%prefix %&a/money %&2add %&e<joueur> %&b<montant>"
     message: "%prefix %&6Vous avez ajouté %&b%amount€ %&6à la balance de %&e%target"
+
+
+Warp:
+  set:
+    set: "%prefix %&6Vous avez set le warp %&e\"%warp\" %&6à votre position"
+  warp:
+    dontexist: "%prefix %&6Le warp %&e\"%warp\" %&6n'existe pas"
+    tped: "%prefix %&6Vous avez été téléporté au warp %&e\"%warp\""
+
+Rank:
+  set: "%prefix %&6Le grade %&a%rank %&6 a été attribué à %&e%target"
+  get: "%prefix %&e%target %&6a le grade %&a%rank"

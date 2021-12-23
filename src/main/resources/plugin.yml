@@ -56,3 +56,12 @@ commands:
   shop:
     aliases: [boutique]
     description: Ouvre le shop au joueur
+  warp:
+    aliases: []
+    description: Téléporte le joueur au warp donné
+  setwarp:
+    aliases: []
+    description: Set le warp à la position du joueur
+  invsee:
+    aliases: [inventorysee]
+    description: Affiche l'inventaire d'un joueur
